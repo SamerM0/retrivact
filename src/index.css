@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300&display=swap');
+
+@theme{
+  --font-funnel: "Funnel Sans",sans-funnel;
+  --color-primary: #FA812F;
+  --color-secondary: #3F88C5;
+  --color-accent1:#F3C623;
+  --color-accent2: #FFB22C;
+  --color-bg: #FEF3E2;
+  --color-success: #80fa74;
+  --color-error: #f8563d;
+
+
+}
