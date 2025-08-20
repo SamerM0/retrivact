@@ -1,7 +1,25 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import getQuestions from "../services/api";
 function Home() {
-  
+  const [questions,setQuestions] = useState([]);
+  const [loading,setLoading] = useState(true);
+  useEffect(() =>{
+    async function loadQuestions(){
+      console.log("test from react")
+      setLoading(true);
+      const data = await getQuestions(6);
+      setQuestions(data);
+      setLoading(false);
+    }
+    loadQuestions();
+  },[])
+  useEffect(()=>{
+    if(loading){
+      console.log("LOADING STARTED")
+    }else{
+      console.log("LOADING ENDED")
+    }
+  },[loading]);
   return (
     <div className="flex justify-center items-center flex-col">
       <h1 className="text-primary font-funnel text-6xl tracking-widest mt-40">
