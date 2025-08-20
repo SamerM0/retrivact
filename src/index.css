@@ -17,7 +17,7 @@
   --color-error: #f44336;
 }
 .dropdown{
-  @apply bg-primary rounded-sm p-2 w-50 hover:bg-primary-600 text-light-shade mt-2;
+  @apply bg-primary rounded-md p-2 w-50 hover:bg-primary-600 text-light-shade mt-2;
 }
 h3 ,select{
   @apply font-roboto;

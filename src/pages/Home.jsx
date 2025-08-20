@@ -1,12 +1,13 @@
 import React from "react";
 
 function Home() {
+  
   return (
     <div className="flex justify-center items-center flex-col">
-      <h1 className="text-primary font-funnel text-6xl tracking-widest mt-25">
+      <h1 className="text-primary font-funnel text-6xl tracking-widest mt-40">
         retrivact
       </h1>
-      <div className="flex flex-col mt-15 ">
+      <div className="flex flex-col mt-20 ">
         <h3 className="text-dark-shade text-lg ">Choose Category</h3>
         <select className="dropdown">
           <option value="any">Any Category</option>
@@ -37,12 +38,13 @@ function Home() {
         </select>
         <h3 className="mt-5 text-dark-shade text-lg">Choose Category</h3>
         <select className="dropdown">
-			<option value="any">Any Difficulty</option>
-			<option value="easy">Easy</option>
-			<option value="medium">Medium</option>
-			<option value="hard">Hard</option>
-		</select>
+          <option value="any">Any Difficulty</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
       </div>
+      <button className="bg-primary p-2 mt-30 w-70 rounded-sm hover:bg-primary-600 active:bg-dark-shade">Play</button>
     </div>
   );
 }
