@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import getQuestions from "../services/api";
 function Home() {
   const [questions,setQuestions] = useState([]);
+  const [category,setCategory] = useState("");
+  const [difficulty,setDifficulty] = useState("");
   const [loading,setLoading] = useState(true);
   useEffect(() =>{
     async function loadQuestions(){
       console.log("test from react")
       setLoading(true);
-      const data = await getQuestions(6);
+      const data = await getQuestions(10,category,difficulty);
       setQuestions(data);
       setLoading(false);
     }
     loadQuestions();
-  },[])
+  },[category,difficulty])
   useEffect(()=>{
     if(loading){
       console.log("LOADING STARTED")
@@ -26,9 +28,9 @@ function Home() {
         retrivact
       </h1>
       <div className="flex flex-col mt-20 ">
-        <h3 className="text-dark-shade text-lg ">Choose Category</h3>
-        <select className="dropdown">
-          <option value="any">Any Category</option>
+        <h3 className="text-dark-shade text-lg ml-3">Category</h3>
+        <select className="dropdown" onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Any Category</option>
           <option value="9">General Knowledge</option>
           <option value="10">Books</option>
           <option value="11">Film</option>
@@ -54,9 +56,9 @@ function Home() {
           <option value="31">Anime & Manga</option>
           <option value="32">Cartoon & Animations</option>
         </select>
-        <h3 className="mt-5 text-dark-shade text-lg">Choose Category</h3>
-        <select className="dropdown">
-          <option value="any">Any Difficulty</option>
+        <h3 className="mt-5 text-dark-shade text-lg ml-3">Difficulty</h3>
+        <select className="dropdown" onChange={(e) => setDifficulty(e.target.value)}>
+          <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
