@@ -1,15 +1,24 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "tailwindcss";
+
 
 @theme{
   --font-funnel: "Funnel Sans",sans-funnel;
-  --color-primary: #FA812F;
-  --color-secondary: #3F88C5;
-  --color-accent1:#F3C623;
-  --color-accent2: #FFB22C;
-  --color-bg: #FEF3E2;
-  --color-success: #80fa74;
-  --color-error: #f8563d;
-
-
+  --font-roboto: "Roboto",roboto;
+  --color-*:initial;
+  --color-primary: #51C9DA;
+  --color-primary-600: #34828C;
+  --color-light-accent: #8BD2EA;
+  --color-dark-accent:#798ECF;
+  --color-light-shade: #EBF3F4;
+  --color-dark-shade: #2F84C9;
+  --color-success: #4eb87a;
+  --color-error: #f44336;
+}
+.dropdown{
+  @apply bg-primary rounded-sm p-2 w-50 hover:bg-primary-600 text-light-shade mt-2;
+}
+h3 ,select{
+  @apply font-roboto;
 }
