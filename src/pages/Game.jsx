@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
-import getQuestions from "../services/api";
+import getData from "../services/api";
+import Question from "../components/question";
 
 function Game({ category, difficulty }) {
-  const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
+  function answer() {
+    setQuestionIndex(questionIndex + 1);
+  };
   useEffect(() => {
     async function loadQuestions() {
-      console.log("test from react");
-      setLoading(true);
-      const data = await getQuestions(10, category, difficulty);
+      setIsLoading(true);
+      const data = await getData(10, category, difficulty);
       console.log(data);
-      setQuestions(data);
-      setLoading(false);
+      setData((prev) => [...prev, ...data]);
+      setIsLoading(false);
     }
     loadQuestions();
-  }, [category, difficulty]);
+  }, []);
   useEffect(() => {
-    if (loading) {
+    if (isLoading) {
       console.log("LOADING STARTED");
     } else {
       console.log("LOADING ENDED");
+
+      if (isFirstLoading) {
+        setIsFirstLoading(false);
+      }
     }
-  }, [loading]);
+  }, [isLoading]);
+  
   return (
     <div>
-      <h1>Game</h1>
+      {!isFirstLoading && data[questionIndex] && (
+        <Question title={data[questionIndex].question} answer={answer} />
+      )}
+      {isLoading && <h1>Loading</h1>}
     </div>
   );
 }
