@@ -8,7 +8,12 @@ function Game({ category, difficulty }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [timer, setTimer] = useState(-1);
-  function answerQuestion() {
+  function answerQuestion(isCorrect) {
+    if(isCorrect){
+      console.log("CORRECT")
+    }else{
+      console.log("INCORRECT")
+    }
     setQuestionIndex(questionIndex + 1);
   }
   //calls the api and adds the new questions to the data array
@@ -49,17 +54,16 @@ function Game({ category, difficulty }) {
             Time: {timer}
           </p>
           <Question
-            title={data[questionIndex].question}
-            answers={[
-              data[questionIndex].correct_answer,
-              ...data[questionIndex].incorrect_answers,
-            ]}
+            question={data[questionIndex].question}
+            correctAnswer={data[questionIndex].correct_answer}
+            incorrectAnswers={[...data[questionIndex].incorrect_answers]}
             answer={answerQuestion}
+            key={questionIndex}
           />
         </div>
       )}
       {isLoading && (
-        <p className="text-dark-shade text-2xl fixed left-0 bottom-0 w-lvw text-center">
+        <p className="text-dark-shade text-2xl fixed left-0 bottom-2 w-lvw text-center">
           Loading
         </p>
       )}
