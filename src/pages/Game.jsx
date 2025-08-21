@@ -21,7 +21,7 @@ function Game({ category, difficulty }) {
     if (isFirstLoading) {
       setIsFirstLoading(false);
     }
-  }, [category, difficulty]);
+  }, [category, difficulty, isFirstLoading]);
   //checks when to load new questions based on the current question index
   useEffect(() => {
     if (isFirstLoading) {
@@ -59,7 +59,9 @@ function Game({ category, difficulty }) {
         </div>
       )}
       {isLoading && (
-        <p className="text-dark-shade text-center text-2xl ">Loading</p>
+        <p className="text-dark-shade text-2xl fixed left-0 bottom-0 w-lvw text-center">
+          Loading
+        </p>
       )}
     </div>
   );
