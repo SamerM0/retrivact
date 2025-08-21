@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Game from "./Game";
+import Question from "../components/question";
 function Home() {
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -9,7 +10,6 @@ function Home() {
       <h1 className="text-primary font-funnel text-6xl tracking-widest mt-35">
         retrivact
       </h1>
-
       {isGameStarted ? (
         <Game difficulty={difficulty} category={category} />
       ) : (
@@ -56,7 +56,7 @@ function Home() {
           </select>
           <button
             onClick={() => setIsGameStarted(true)}
-            className="bg-primary p-2 mt-20 w-70 rounded-sm hover:bg-primary-600 active:bg-dark-shade text-light-shade font-roboto"
+            className="btn p-2 mt-20 w-70"
           >
             Play
           </button>

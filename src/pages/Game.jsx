@@ -7,7 +7,7 @@ function Game({ category, difficulty }) {
   const [data, setData] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
-  function answer() {
+  function answerQuestion() {
     setQuestionIndex(questionIndex + 1);
   }
   async function loadQuestions() {
@@ -30,7 +30,14 @@ function Game({ category, difficulty }) {
   return (
     <div>
       {!isFirstLoading && data[questionIndex] && (
-        <Question title={data[questionIndex].question} answer={answer} />
+        <Question
+          title={data[questionIndex].question}
+          answers={[
+            data[questionIndex].correct_answer,
+            ...data[questionIndex].incorrect_answers,
+          ]}
+          answer={answerQuestion}
+        />
       )}
       {isLoading && <h1>Loading</h1>}
     </div>
