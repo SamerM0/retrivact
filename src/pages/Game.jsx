@@ -7,6 +7,7 @@ function Game({ category, difficulty }) {
   const [data, setData] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
+  const [timer, setTimer] = useState(-1);
   function answerQuestion() {
     setQuestionIndex(questionIndex + 1);
   }
@@ -17,12 +18,15 @@ function Game({ category, difficulty }) {
     console.log(data);
     setData((prev) => [...prev, ...data]);
     setIsLoading(false);
+    if (isFirstLoading) {
+      setIsFirstLoading(false);
+    }
   }, [category, difficulty]);
   //checks when to load new questions based on the current question index
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
-      setIsFirstLoading(false);
+      setTimer(60);
     }
     if (questionIndex + 5 >= data.length && !isLoading) {
       loadQuestions();
@@ -30,19 +34,33 @@ function Game({ category, difficulty }) {
     }
     console.log(questionIndex);
   }, [questionIndex]);
+  useEffect(() => {
+    if (!isFirstLoading && timer > 0) {
+      setTimeout(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    }
+  }, [timer, isFirstLoading]);
   return (
     <div>
       {!isFirstLoading && data[questionIndex] && (
-        <Question
-          title={data[questionIndex].question}
-          answers={[
-            data[questionIndex].correct_answer,
-            ...data[questionIndex].incorrect_answers,
-          ]}
-          answer={answerQuestion}
-        />
+        <div>
+          <p className="text-dark-shade text-center text-lg mt-2">
+            Time: {timer}
+          </p>
+          <Question
+            title={data[questionIndex].question}
+            answers={[
+              data[questionIndex].correct_answer,
+              ...data[questionIndex].incorrect_answers,
+            ]}
+            answer={answerQuestion}
+          />
+        </div>
       )}
-      {isLoading && <h1>Loading</h1>}
+      {isLoading && (
+        <p className="text-dark-shade text-center text-2xl ">Loading</p>
+      )}
     </div>
   );
 }
