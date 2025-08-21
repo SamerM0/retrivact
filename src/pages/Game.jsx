@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import getData from "../services/api";
 import Question from "../components/question";
 
@@ -10,13 +10,15 @@ function Game({ category, difficulty }) {
   function answerQuestion() {
     setQuestionIndex(questionIndex + 1);
   }
-  async function loadQuestions() {
+  //calls the api and adds the new questions to the data array
+  const loadQuestions = useCallback(async () => {
     setIsLoading(true);
     const data = await getData(10, category, difficulty);
     console.log(data);
     setData((prev) => [...prev, ...data]);
     setIsLoading(false);
-  }
+  }, [category, difficulty]);
+  //checks when to load new questions based on the current question index
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
@@ -26,6 +28,7 @@ function Game({ category, difficulty }) {
       loadQuestions();
       console.log("loading new questions");
     }
+    console.log(questionIndex);
   }, [questionIndex]);
   return (
     <div>
