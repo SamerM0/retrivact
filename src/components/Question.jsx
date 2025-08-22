@@ -17,7 +17,6 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
       { answer: correctAnswer, isCorrect: true },
     ];
     setAnswers(shuffle(tempAnswers));
-    console.log(correctAnswer);
   }, []);
   return (
     <div className="flex flex-col items-center ">

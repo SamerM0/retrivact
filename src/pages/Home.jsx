@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Game from "./Game";
-import Question from "../components/question";
-import StatsDisplayer from "../components/StatsDisplayer";
 function Home() {
   const [category, setCategory] = useState({});
   const [difficulty, setDifficulty] = useState({});
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [tries, setTries] = useState(0);
+  function playAgain() {
+    setIsGameStarted(false);
+    setTries((prev) => prev + 1);
+  }
   return (
     <div className="flex justify-center items-center flex-col">
       <h1
@@ -16,7 +19,12 @@ function Home() {
         retrivact
       </h1>
       {isGameStarted ? (
-        <Game difficulty={difficulty} category={category} />
+        <Game
+          key={tries}
+          playAgain={playAgain}
+          difficulty={difficulty}
+          category={category}
+        />
       ) : (
         <div className="flex flex-col mt-15 items-center">
           <select

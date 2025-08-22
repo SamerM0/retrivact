@@ -3,7 +3,7 @@ import getData from "../services/api";
 import Question from "../components/question";
 import StatsDisplayer from "../components/StatsDisplayer";
 
-function Game({ category, difficulty }) {
+function Game({ playAgain, category, difficulty }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -12,21 +12,21 @@ function Game({ category, difficulty }) {
   const [score, setScore] = useState(0);
   const [isGameEnded, setIsGameEnded] = useState(false);
   function endGame() {
-    console.log("ENDED");
     if (!isGameEnded) {
       setIsGameEnded(true);
     }
   }
   function answerQuestion(isCorrect) {
     if (isCorrect) {
-      console.log("CORRECT");
       setScore((prev) => prev + 1);
+      setTimeout(() => {
+        setQuestionIndex(questionIndex + 1);
+      }, 300);
     } else {
-      console.log("INCORRECT");
+      setTimeout(() => {
+        setQuestionIndex(questionIndex + 1);
+      }, 900);
     }
-    setTimeout(() => {
-      setQuestionIndex(questionIndex + 1);
-    }, 500);
   }
   //calls the api and adds the new questions to the data array
   const loadQuestions = useCallback(async () => {
@@ -42,13 +42,11 @@ function Game({ category, difficulty }) {
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
-      setTimer(10);
+      setTimer(60);
     }
     if (questionIndex + 5 >= data.length && !isLoading) {
       loadQuestions();
-      console.log("loading new questions");
     }
-    console.log(questionIndex);
   }, [questionIndex]);
   useEffect(() => {
     if (timer <= 0 && !isFirstLoading) {
@@ -63,12 +61,20 @@ function Game({ category, difficulty }) {
   return (
     <div>
       {isGameEnded && (
-        <StatsDisplayer
-          score={score}
-          numberOfQuestions={questionIndex}
-          category={category.text === undefined ? "Any" : category.text}
-          difficulty={difficulty.text === undefined ? "Any" : difficulty.text}
-        />
+        <div className="flex flex-col justify-center items-center">
+          <StatsDisplayer
+            score={score}
+            numberOfQuestions={questionIndex}
+            category={category.text === undefined ? "Any" : category.text}
+            difficulty={difficulty.text === undefined ? "Any" : difficulty.text}
+          />
+          <button
+            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-50 active:bg-dark-shade shadow-2xl"
+            onClick={playAgain}
+          >
+            Play Again
+          </button>
+        </div>
       )}
       {!isFirstLoading && data[questionIndex] && !isGameEnded && (
         <div>
