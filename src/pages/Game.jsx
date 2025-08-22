@@ -42,7 +42,7 @@ function Game({ playAgain, category, difficulty }) {
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
-      setTimer(60);
+      setTimer(10);
     }
     if (questionIndex + 5 >= data.length && !isLoading) {
       loadQuestions();
@@ -69,7 +69,7 @@ function Game({ playAgain, category, difficulty }) {
             difficulty={difficulty.text === undefined ? "Any" : difficulty.text}
           />
           <button
-            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-50 active:bg-dark-shade shadow-2xl"
+            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-50 text-lg active:bg-dark-shade shadow-2xl md:w-80 md:h-15 md:text-2xl"
             onClick={playAgain}
           >
             Play Again

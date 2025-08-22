@@ -21,13 +21,14 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
   return (
     <div className="flex flex-col items-center ">
       <div className="flex items-center h-25">
-        <p className="text-dark-shade text-center text-lg mx-2">
+        <p className="text-dark-shade text-center text-lg mx-2 md:text-2xl">
           {decodeHtml(question)}
         </p>
       </div>
-      <div className="grid grid-cols-1 w-80 ">
+      <div className="grid grid-cols-1 w-80 md:grid-cols-2 md:w-170">
         {answers.map((e, i) => {
-          let classbtn = "btn p-3 mt-5 text-md max-h-25 min-h-18";
+          let classbtn =
+            "btn p-3 mt-5 text-md max-h-25 min-h-18 md:mx-4 md:text-xl md:min-h-30 md:max-h-40";
           if (isAnswered) {
             if (e.isCorrect) {
               classbtn += " bg-success";

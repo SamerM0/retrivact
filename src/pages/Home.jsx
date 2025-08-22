@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Game from "./Game";
 function Home() {
-  const [category, setCategory] = useState({});
-  const [difficulty, setDifficulty] = useState({});
+  const [category, setCategory] = useState({ value: 0, text: "Any" });
+  const [difficulty, setDifficulty] = useState({ value: 0, text: "Any" });
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [tries, setTries] = useState(0);
   function playAgain() {
@@ -12,8 +12,8 @@ function Home() {
   return (
     <div className="flex justify-center items-center flex-col">
       <h1
-        className={`text-primary font-funnel text-6xl tracking-widest transition-all duration-600 ${
-          !isGameStarted ? "mt-35" : "mt-15"
+        className={`text-primary font-funnel text-6xl md:text-7xl tracking-widest transition-all duration-600 ${
+          !isGameStarted ? "mt-35 md:mt-80" : "mt-15 md:mt-40"
         }`}
       >
         retrivact
@@ -28,6 +28,7 @@ function Home() {
       ) : (
         <div className="flex flex-col mt-15 items-center">
           <select
+            defaultValue={category.value}
             className="dropdown"
             onChange={(e) =>
               setCategory({
@@ -64,6 +65,7 @@ function Home() {
           </select>
 
           <select
+            defaultValue={difficulty.value}
             className="dropdown"
             onChange={(e) =>
               setDifficulty({
@@ -79,7 +81,7 @@ function Home() {
           </select>
           <button
             onClick={() => setIsGameStarted(true)}
-            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-70 active:bg-dark-shade"
+            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-70 active:bg-dark-shade shadow-2xl text-2xl md:text-3xl md:h-18 md:w-90"
           >
             Play
           </button>
