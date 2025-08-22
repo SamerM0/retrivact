@@ -56,7 +56,7 @@ function Home() {
           </select>
           <button
             onClick={() => setIsGameStarted(true)}
-            className="btn p-2 mt-20 w-70"
+            className="btn bg-primary p-2 mt-20 w-70"
           >
             Play
           </button>
