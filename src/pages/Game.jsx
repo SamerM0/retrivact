@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import getData from "../services/api";
-import Question from "../components/question";
+import Question from "../components/Question";
 import StatsDisplayer from "../components/StatsDisplayer";
 
 function Game({ playAgain, category, difficulty }) {
