@@ -19,9 +19,9 @@
 .dropdown{
   @apply bg-primary rounded-md p-2 w-50 mt-15 hover:bg-primary-600 text-light-shade;
 }
-p,h3 ,select{
+h4,h3 ,select{
   @apply font-roboto;
 }
 .btn{
-  @apply rounded-sm hover:bg-primary-600 active:bg-dark-shade text-light-shade font-roboto;
+  @apply rounded-sm active:bg-dark-shade text-light-shade font-roboto;
 }

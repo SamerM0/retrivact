@@ -7,7 +7,7 @@ function Home() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   return (
     <div className="flex justify-center items-center flex-col">
-      <h1 className="text-primary font-funnel text-6xl tracking-widest mt-35">
+      <h1 className={`text-primary font-funnel text-6xl tracking-widest transition-all duration-600 ${!isGameStarted ? "mt-35" : "mt-15"}`}>
         retrivact
       </h1>
       {isGameStarted ? (
@@ -56,7 +56,7 @@ function Home() {
           </select>
           <button
             onClick={() => setIsGameStarted(true)}
-            className="btn bg-primary p-2 mt-20 w-70"
+            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-70"
           >
             Play
           </button>

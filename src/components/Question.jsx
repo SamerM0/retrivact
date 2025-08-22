@@ -7,7 +7,7 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
   function handleClick(index, isCorrect) {
     if (!isAnswered) {
       setIsAnswered(true);
-      setTimeout(() => answer(isCorrect), 500);
+      answer(isCorrect)
       setAnswerIndex(index);
     }
   }
@@ -21,7 +21,7 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
   }, []);
   return (
     <div className="flex flex-col items-center ">
-      <div className="flex items-center h-25 mt-10">
+      <div className="flex items-center h-25">
         <p className="text-dark-shade text-center text-lg mx-2">
           {decodeHtml(question)}
         </p>
@@ -38,7 +38,7 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
               classbtn += " bg-primary";
             }
           } else {
-            classbtn += " bg-primary";
+            classbtn += " bg-primary hover:bg-primary-600";
           }
           return (
             <button

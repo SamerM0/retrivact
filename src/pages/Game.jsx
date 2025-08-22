@@ -8,13 +8,17 @@ function Game({ category, difficulty }) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [timer, setTimer] = useState(-1);
+  const [score, setScore] = useState(0);
   function answerQuestion(isCorrect) {
-    if(isCorrect){
-      console.log("CORRECT")
-    }else{
-      console.log("INCORRECT")
+    if (isCorrect) {
+      console.log("CORRECT");
+      setScore((prev) => prev + 1);
+    } else {
+      console.log("INCORRECT");
     }
-    setQuestionIndex(questionIndex + 1);
+    setTimeout(() => {
+      setQuestionIndex(questionIndex + 1);
+    }, 500);
   }
   //calls the api and adds the new questions to the data array
   const loadQuestions = useCallback(async () => {
@@ -50,9 +54,12 @@ function Game({ category, difficulty }) {
     <div>
       {!isFirstLoading && data[questionIndex] && (
         <div>
-          <p className="text-dark-shade text-center text-lg mt-2">
-            Time: {timer}
-          </p>
+          <h4 className="text-dark-shade text-center text-lg mt-6">
+            {timer} {timer !== 1 ? "Seconds" : "Second"}
+          </h4>
+          <h3 className="text-dark-shade text-center text-2xl mt-4">
+            Score {score}
+          </h3>
           <Question
             question={data[questionIndex].question}
             correctAnswer={data[questionIndex].correct_answer}
@@ -63,9 +70,9 @@ function Game({ category, difficulty }) {
         </div>
       )}
       {isLoading && (
-        <p className="text-dark-shade text-2xl fixed left-0 bottom-2 w-lvw text-center">
+        <h4 className="text-dark-shade text-2xl fixed left-0 bottom-2 w-lvw text-center">
           Loading
-        </p>
+        </h4>
       )}
     </div>
   );
