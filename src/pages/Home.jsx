@@ -38,8 +38,8 @@ function Home() {
             <option value="15">Video Games</option>
             <option value="16">Board Games</option>
             <option value="17">Science & Nature</option>
-            <option value="18">Science: Computers</option>
-            <option value="19">Science: Mathematics</option>
+            <option value="18">Computers</option>
+            <option value="19">Mathematics</option>
             <option value="20">Mythology</option>
             <option value="21">Sports</option>
             <option value="22">Geography</option>
@@ -50,7 +50,7 @@ function Home() {
             <option value="27">Animals</option>
             <option value="28">Vehicles</option>
             <option value="29">Comics</option>
-            <option value="30">Science: Gadgets</option>
+            <option value="30">Gadgets</option>
             <option value="31">Anime & Manga</option>
             <option value="32">Cartoon & Animations</option>
           </select>

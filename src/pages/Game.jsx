@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import getData from "../services/api";
 import Question from "../components/question";
+import StatsDisplayer from "../components/StatsDisplayer";
 
 function Game({ category, difficulty }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +12,10 @@ function Game({ category, difficulty }) {
   const [score, setScore] = useState(0);
   const [isGameEnded, setIsGameEnded] = useState(false);
   function endGame() {
-    setIsGameEnded(true);
+    console.log("ENDED");
+    if (!isGameEnded) {
+      setIsGameEnded(true);
+    }
   }
   function answerQuestion(isCorrect) {
     if (isCorrect) {
@@ -38,7 +42,7 @@ function Game({ category, difficulty }) {
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
-      setTimer(60);
+      setTimer(10);
     }
     if (questionIndex + 5 >= data.length && !isLoading) {
       loadQuestions();
@@ -47,7 +51,7 @@ function Game({ category, difficulty }) {
     console.log(questionIndex);
   }, [questionIndex]);
   useEffect(() => {
-    if (timer <= 0) {
+    if (timer <= 0 && !isFirstLoading) {
       endGame();
     }
     if (!isFirstLoading && timer > 0) {
@@ -58,7 +62,15 @@ function Game({ category, difficulty }) {
   }, [timer, isFirstLoading]);
   return (
     <div>
-      {!isFirstLoading && data[questionIndex] && (
+      {isGameEnded && (
+        <StatsDisplayer
+          score={score}
+          numberOfQuestions={questionIndex}
+          category={category.text === undefined ? "Any" : category.text}
+          difficulty={difficulty.text === undefined ? "Any" : difficulty.text}
+        />
+      )}
+      {!isFirstLoading && data[questionIndex] && !isGameEnded && (
         <div>
           <h4 className="text-dark-shade text-center text-lg mt-6">
             {timer} {timer !== 1 ? "Seconds" : "Second"}
@@ -75,7 +87,7 @@ function Game({ category, difficulty }) {
           />
         </div>
       )}
-      {isLoading && (
+      {isLoading && !isGameEnded && (
         <h4 className="text-dark-shade text-2xl fixed left-0 bottom-2 w-lvw text-center">
           Loading
         </h4>
