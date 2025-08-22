@@ -6,7 +6,6 @@ async function getData(n, category = "", difficulty = "") {
   let retries = 3;
   let time = 3500;
   for (let i = 0; i < retries; i++) {
-    console.log("IN GET DATA ", i);
     try {
       const response = await fetch(
         `${BASE_URL}?amount=${n}&category=${category}&difficulty=${difficulty}`
