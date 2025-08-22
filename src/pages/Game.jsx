@@ -42,7 +42,7 @@ function Game({ playAgain, category, difficulty }) {
   useEffect(() => {
     if (isFirstLoading) {
       loadQuestions();
-      setTimer(10);
+      setTimer(60);
     }
     if (questionIndex + 5 >= data.length && !isLoading) {
       loadQuestions();
