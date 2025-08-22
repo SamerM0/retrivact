@@ -9,6 +9,10 @@ function Game({ category, difficulty }) {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [timer, setTimer] = useState(-1);
   const [score, setScore] = useState(0);
+  const [isGameEnded, setIsGameEnded] = useState(false);
+  function endGame() {
+    setIsGameEnded(true);
+  }
   function answerQuestion(isCorrect) {
     if (isCorrect) {
       console.log("CORRECT");
@@ -23,8 +27,7 @@ function Game({ category, difficulty }) {
   //calls the api and adds the new questions to the data array
   const loadQuestions = useCallback(async () => {
     setIsLoading(true);
-    const data = await getData(10, category, difficulty);
-    console.log(data);
+    const data = await getData(10, category.value, difficulty.value);
     setData((prev) => [...prev, ...data]);
     setIsLoading(false);
     if (isFirstLoading) {
@@ -44,6 +47,9 @@ function Game({ category, difficulty }) {
     console.log(questionIndex);
   }, [questionIndex]);
   useEffect(() => {
+    if (timer <= 0) {
+      endGame();
+    }
     if (!isFirstLoading && timer > 0) {
       setTimeout(() => {
         setTimer((prev) => prev - 1);

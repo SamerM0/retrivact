@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Game from "./Game";
 import Question from "../components/question";
+import StatsDisplayer from "../components/StatsDisplayer";
 function Home() {
-  const [category, setCategory] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+  const [category, setCategory] = useState({});
+  const [difficulty, setDifficulty] = useState({});
   const [isGameStarted, setIsGameStarted] = useState(false);
   return (
     <div className="flex justify-center items-center flex-col">
-      <h1 className={`text-primary font-funnel text-6xl tracking-widest transition-all duration-600 ${!isGameStarted ? "mt-35" : "mt-15"}`}>
+      <h1
+        className={`text-primary font-funnel text-6xl tracking-widest transition-all duration-600 ${
+          !isGameStarted ? "mt-35" : "mt-15"
+        }`}
+      >
         retrivact
       </h1>
       {isGameStarted ? (
@@ -16,7 +21,12 @@ function Home() {
         <div className="flex flex-col mt-15 items-center">
           <select
             className="dropdown"
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) =>
+              setCategory({
+                value: e.target.value,
+                text: e.target.options[e.target.selectedIndex].text,
+              })
+            }
           >
             <option value="">Any Category</option>
             <option value="9">General Knowledge</option>
@@ -47,7 +57,12 @@ function Home() {
 
           <select
             className="dropdown"
-            onChange={(e) => setDifficulty(e.target.value)}
+            onChange={(e) =>
+              setDifficulty({
+                value: e.target.value,
+                text: e.target.options[e.target.selectedIndex].text,
+              })
+            }
           >
             <option value="">Any Difficulty</option>
             <option value="easy">Easy</option>
@@ -56,7 +71,7 @@ function Home() {
           </select>
           <button
             onClick={() => setIsGameStarted(true)}
-            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-70"
+            className="btn hover:bg-primary-600 bg-primary p-2 mt-20 w-70 active:bg-dark-shade"
           >
             Play
           </button>

@@ -23,5 +23,5 @@ h4,h3 ,select{
   @apply font-roboto;
 }
 .btn{
-  @apply rounded-sm active:bg-dark-shade text-light-shade font-roboto;
+  @apply rounded-sm text-light-shade font-roboto;
 }

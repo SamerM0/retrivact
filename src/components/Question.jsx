@@ -7,7 +7,7 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
   function handleClick(index, isCorrect) {
     if (!isAnswered) {
       setIsAnswered(true);
-      answer(isCorrect)
+      answer(isCorrect);
       setAnswerIndex(index);
     }
   }
@@ -38,7 +38,7 @@ const Question = ({ question, correctAnswer, incorrectAnswers, answer }) => {
               classbtn += " bg-primary";
             }
           } else {
-            classbtn += " bg-primary hover:bg-primary-600";
+            classbtn += " bg-primary hover:bg-primary-600 active:bg-dark-shade";
           }
           return (
             <button
