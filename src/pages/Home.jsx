@@ -87,6 +87,13 @@ function Home() {
           </button>
         </div>
       )}
+      <a
+        target="_blank"
+        href="https://github.com/SamerM0/retrivact"
+        className="text-dark-shade text-lg fixed left-5 bottom-2 cursor-pointer"
+      >
+        View source
+      </a>
     </div>
   );
 }
